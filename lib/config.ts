@@ -29,7 +29,7 @@ export const config = {
   overlap: number("CHUNK_OVERLAP", 80, 0, 200),
   threshold: number("MIN_SIMILARITY", 0.3, 0, 1),
   timeout: number("OLLAMA_TIMEOUT_MS", 180000, 1000, 600000),
-  contextSize: number("OLLAMA_CONTEXT_SIZE", 8192, 2048, 32768),
+  contextSize: number("OLLAMA_CONTEXT_SIZE", 4096, 2048, 32768),
   answerTokens: number("ANSWER_MAX_TOKENS", 640, 256, 2000),
   keepAlive: process.env.OLLAMA_KEEP_ALIVE || "30m",
   maxUpload: number("MAX_UPLOAD_MB", 20, 1, 100) * 1024 * 1024,

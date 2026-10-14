@@ -2,6 +2,8 @@ import { terms } from "./retrieval";
 /** Extract complete contiguous sentence/line windows; never paraphrase document evidence. */
 export function focusEvidence(text: string, query: string): string {
   if (text.length <= 650) return text;
+  // Open-ended lists need their items, not just the heading matching query words.
+  if(/مهارات|اهداف|أهداف|وثائق|مستندات|شروط|محاور|محتوى|مخرجات|skills|objectives|goals|requirements|documents|contents|outcomes/iu.test(query))return text;
   // Conditions can be far from the matching fee/duration. Keep the whole original
   // passage rather than presenting a qualifier-free extract to the generator.
   if(/بشرط|يشترط|استثناء|باستثناء|يعفى|لا يشمل|لا تبدأ|بعد اكتمال|unless|except|provided that|subject to/iu.test(text))return text;

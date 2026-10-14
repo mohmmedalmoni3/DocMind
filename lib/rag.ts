@@ -5,6 +5,8 @@ import { cosine, rank, rankQueries } from "./retrieval";
 import { normalizeQuestion } from './query-normalization';
 import { sessionEvidence } from './session-evidence';
 import { questionParts } from './question-parts';
+import { scopedFieldEvidence } from './scoped-fields';
+import {headingOnlyAnswer} from './answer-quality';
 import { alignNumericCitations, alignVerbatimCitations, numericCitationsSupported } from "./citations";
 import type {
   ChatTurn,
@@ -270,6 +272,17 @@ export async function answer(
       "This document is no longer indexed. Refresh your library.",
     );
   const parts=!options.singlePart && !options.summary && !comparing ? questionParts(query) : [query];
+  const fieldQuote=config.directFacts && style==='brief' && !options.summary && !comparing && parts.length===1 && (selectedFiles?.length===1 || !!options.file)
+    ? scopedFieldEvidence(query,candidates) : null;
+  if(fieldQuote){
+    const result:AnswerResult={...fieldQuote,query,model,confidence:'medium',method:'extractive'};
+    for(const name of ['Searching','Ranking','Generating'])emit({type:'step',step:{name,status:'done',ms:0,detail:'Explicit field in selected document · original text · no embedding or generation'}});
+    emit({type:'sources',sources:result.sources,confidence:result.confidence,query,model,evidenceMs:Math.round(performance.now()-started)});
+    emit({type:'token',text:result.text});
+    emit({type:'done',ms:Math.round(performance.now()-started),firstTokenMs:Math.round(performance.now()-started),grounded:true,cached:false,method:'extractive'});
+    if(!options.bypassCache)answers.set(key,result);
+    return result;
+  }
   if(parts.length>1){
     if(parts.length>12)throw new Error(arabic(question)?'يحتوي السؤال على أكثر من 12 شقًا. قسّمه إلى طلبين حتى أجيب عن جميع الأجزاء.':'More than 12 question parts. Split this request into two prompts so every part can be answered.');
     const merged:Source[]=[];const sections:string[]=[];const results:AnswerResult[]=[];
@@ -301,7 +314,9 @@ export async function answer(
     const method=results.every(r=>r.method==='extractive')?'extractive':'generated';
     for(const name of ['Searching','Ranking','Generating'])emit({type:'step',step:{name,status:'done',ms:Math.round(performance.now()-started),detail:`Answered ${parts.length}/${parts.length} parts independently · missing facts stay explicit`}});
     emit({type:'done',ms:Math.round(performance.now()-started),firstTokenMs,grounded,cached:false,method});
-    return {text,sources:merged,confidence,query,model,method} as AnswerResult;
+    const result={text,sources:merged,confidence,query,model,method} as AnswerResult;
+    if(grounded&&!options.bypassCache)answers.set(key,result);
+    return result;
   }
   const needsSubject=/(?:\bit\b|\bits\b|\bthem\b|ذلك|مدتها|رسومها|اهدافها|أهدافها|له|لها)(?:\s|[؟?]|$)/iu.test(query);
   const goalVariant=/[اأ]هداف/.test(query)?query.replace(/[اأ]هداف/g,'الهدف النهائي والمهارات المكتسبة'):undefined;
@@ -461,7 +476,7 @@ export async function answer(
     if (
       text.trim() &&
       !text.includes(refusal(question)) &&
-      (!validCitations(text, sources) || !numericCitationsSupported(text,sources))
+      (!validCitations(text, sources) || !numericCitationsSupported(text,sources) || headingOnlyAnswer(text,sources))
     ) {
       const repaired = await complete(
         model,
@@ -470,7 +485,7 @@ export async function answer(
             role: "system",
             content:
               system +
-              " Every factual sentence MUST end with a source citation such as [1]. Verify every numerical value and unit directly in the cited passage. Distinguish total hours from daily session duration. Correct unsupported numbers; do not trust the draft. Output only the corrected answer.",
+              " Every factual sentence MUST end with a source citation such as [1]. Verify every numerical value and unit directly in the cited passage. Distinguish total hours from daily session duration. A section heading alone is not an answer: extract the actual listed skills, objectives or requested facts from the passage body. Correct unsupported numbers; do not trust the draft. Output only the corrected answer.",
           },
           {
             role: "user",
@@ -499,7 +514,7 @@ export async function answer(
       text = aligned;
       emit({ type: "replace", text });
     }
-    if(!numericCitationsSupported(text,sources)){
+    if(!numericCitationsSupported(text,sources)||headingOnlyAnswer(text,sources)){
       text=refusal(question);emit({type:'replace',text});
     }
     if (

@@ -50,7 +50,7 @@ test('full pipeline sends canonical dialect question to generation and preserves
   prompt=body.messages.at(-1).content;
   return new Response(JSON.stringify({message:{content:'إجمالي التدريب 20 ساعة [1].'},done:true})+'\n');
  });
- const r=await answer('شقد الساعات',[],()=>{},{files:['course.md'],bypassCache:true});
+ const r=await answer('شقد الساعات',[],()=>{},{files:['course.md'],bypassCache:true,style:'detailed'});
  assert.equal(r.query,'كم عدد الساعات');assert.ok(inputs.some(q=>q.includes('شقد الساعات'))&&inputs.some(q=>q.includes('كم عدد الساعات')));
  assert.ok(prompt.includes('RESOLVED SEARCH QUESTION (same intent, not evidence): كم عدد الساعات'));assert.ok(!prompt.includes('90 ساعة'));assert.equal(r.sources[0].file,'course.md');assert.match(r.text,/20 ساعة/);
 });

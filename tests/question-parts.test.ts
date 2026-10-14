@@ -44,7 +44,7 @@ test('compound answers cover both parts, retain partial refusal, merge citations
  const events:RagEvent[]=[];
  const good=await answer('شقد الساعات و اهداف الدورة',[],e=>events.push(e),{files:['course.md'],bypassCache:true});
  assert.match(good.text,/20 ساعة/);assert.match(good.text,/بناء أوامر/);assert.match(good.text,/### 2\./);assert.ok(good.sources.every(s=>s.file==='course.md'));
- assert.equal(events.filter(e=>e.type==='done').length,1);assert.equal(prompts.length,2);
+ assert.equal(events.filter(e=>e.type==='done').length,1);assert.equal(prompts.length,0,'Explicit scoped fields need no generation');
  const partial=await answer('شقد الساعات وهل يوجد رقم هاتف؟',[],()=>{},{files:['course.md'],bypassCache:true});
  assert.match(partial.text,/20 ساعة/);assert.match(partial.text,/### 2\./);assert.match(partial.text,/لم أجد/);
  assert.ok(new Set(partial.sources.map(s=>s.citation)).size===partial.sources.length);

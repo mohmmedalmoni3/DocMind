@@ -1,5 +1,7 @@
 # DocMind
 
+Latest local latency improvements, measured results and safe fallback behavior: [SPEED.md](SPEED.md).
+
 Full Arabic documentation, architecture, workflow, interface guide and evaluation reports are in [documentation/](documentation/). Start with [the complete Arabic guide](documentation/DocMind-Documentation-AR.html) and [the release acceptance report](documentation/DocMind-Release-Acceptance-AR.html).
 
 This repository includes source code, tests, local setup tools and fictional demo documents. Install dependencies and local Ollama models using the instructions below. Personal uploads, local environment settings, generated indexes, model weights and installed dependencies are excluded.
