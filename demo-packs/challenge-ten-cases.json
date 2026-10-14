@@ -1,0 +1,213 @@
+{
+  "notice": "Synthetic fixed regression set authored locally, not a blind or official committee evaluation. Freeze before first run; retain failures.",
+  "cases": [
+    {
+      "id": "fee-1",
+      "question": "كم رسم خدمة إصدار تصريح السوق؟",
+      "required": [
+        "19",
+        "دينار"
+      ],
+      "sourceFile": "01-service.md",
+      "sourceTerms": [
+        "19"
+      ]
+    },
+    {
+      "id": "fee-2",
+      "question": "كم رسم خدمة تجديد تصريح السوق؟",
+      "required": [
+        "27",
+        "دينار"
+      ],
+      "sourceFile": "02-service.md",
+      "sourceTerms": [
+        "27"
+      ]
+    },
+    {
+      "id": "fee-3",
+      "question": "كم رسم خدمة إصدار بطاقة الحديقة؟",
+      "required": [
+        "13",
+        "دينار"
+      ],
+      "sourceFile": "03-service.md",
+      "sourceTerms": [
+        "13"
+      ]
+    },
+    {
+      "id": "fee-4",
+      "question": "كم رسم خدمة تجديد بطاقة الحديقة؟",
+      "required": [
+        "45",
+        "دينار"
+      ],
+      "sourceFile": "04-service.md",
+      "sourceTerms": [
+        "45"
+      ]
+    },
+    {
+      "id": "fee-5",
+      "question": "كم رسم خدمة حجز قاعة الحي؟",
+      "required": [
+        "8",
+        "دينار"
+      ],
+      "sourceFile": "05-service.md",
+      "sourceTerms": [
+        "8"
+      ]
+    },
+    {
+      "id": "fee-6",
+      "question": "كم رسم خدمة طلب حاوية إضافية؟",
+      "required": [
+        "22",
+        "دينار"
+      ],
+      "sourceFile": "06-service.md",
+      "sourceTerms": [
+        "22"
+      ]
+    },
+    {
+      "id": "fee-7",
+      "question": "كم رسم خدمة إصدار شهادة عنوان؟",
+      "required": [
+        "6",
+        "دينار"
+      ],
+      "sourceFile": "07-service.md",
+      "sourceTerms": [
+        "6"
+      ]
+    },
+    {
+      "id": "fee-8",
+      "question": "كم رسم خدمة تعديل شهادة عنوان؟",
+      "required": [
+        "34",
+        "دينار"
+      ],
+      "sourceFile": "08-service.md",
+      "sourceTerms": [
+        "34"
+      ]
+    },
+    {
+      "id": "fee-9",
+      "question": "كم رسم خدمة حجز ملعب الحي؟",
+      "required": [
+        "12",
+        "دينار"
+      ],
+      "sourceFile": "09-service.md",
+      "sourceTerms": [
+        "12"
+      ]
+    },
+    {
+      "id": "fee-10",
+      "question": "كم رسم خدمة إصدار بطاقة مركز القراءة؟",
+      "required": [
+        "16",
+        "دينار"
+      ],
+      "sourceFile": "10-service.md",
+      "sourceTerms": [
+        "16"
+      ]
+    },
+    {
+      "id": "ambiguous-fee",
+      "question": "كم الرسوم؟",
+      "required": [
+        "أي خدمة تقصد"
+      ],
+      "clarification": true
+    },
+    {
+      "id": "ambiguous-duration",
+      "question": "كم المدة؟",
+      "required": [
+        "أي خدمة تقصد"
+      ],
+      "clarification": true
+    },
+    {
+      "id": "conditional-exemption",
+      "question": "هل المستفيد المسجل في برنامج الدعم معفى من رسوم إصدار تصريح السوق وما الإثبات؟",
+      "required": [
+        "شهادة",
+        "استحقاق",
+        "سارية"
+      ],
+      "sourceFile": "01-service.md",
+      "sourceTerms": [
+        "بشرط",
+        "شهادة"
+      ]
+    },
+    {
+      "id": "duration-start",
+      "question": "كم مدة إنجاز تجديد بطاقة الحديقة ومتى تبدأ؟",
+      "required": [
+        "5",
+        "عمل",
+        "اكتمال"
+      ],
+      "sourceFile": "04-service.md",
+      "sourceTerms": [
+        "5",
+        "اكتمال"
+      ]
+    },
+    {
+      "id": "two-services",
+      "question": "ما رسم إصدار تصريح السوق وما رسم تجديد تصريح السوق؟",
+      "required": [
+        "19",
+        "27"
+      ],
+      "sourceFiles": [
+        "01-service.md",
+        "02-service.md"
+      ]
+    },
+    {
+      "id": "absent-phone",
+      "question": "ما رقم هاتف الدعم لخدمة حجز ملعب الحي؟",
+      "required": [
+        "لم أجد"
+      ],
+      "refusal": true
+    },
+    {
+      "id": "follow-up",
+      "question": "وما مدة الإنجاز ومتى تبدأ؟",
+      "history": [
+        {
+          "role": "user",
+          "content": "كم رسم خدمة طلب حاوية إضافية؟"
+        },
+        {
+          "role": "assistant",
+          "content": "الرسم 22 دينارا."
+        }
+      ],
+      "required": [
+        "6",
+        "عمل",
+        "اكتمال"
+      ],
+      "sourceFile": "06-service.md",
+      "sourceTerms": [
+        "6",
+        "اكتمال"
+      ]
+    }
+  ]
+}

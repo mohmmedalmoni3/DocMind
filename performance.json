@@ -1,0 +1,191 @@
+{
+  "at": "2026-10-11T11:17:34.451Z",
+  "results": [
+    {
+      "question": "When does the Atlas public beta launch?",
+      "text": "[1] The Atlas public beta launches on November 18, 2026.",
+      "pass": true,
+      "firstTokenMs": 13635,
+      "ms": 16567,
+      "replacements": 0,
+      "steps": [
+        {
+          "name": "Rewriting query",
+          "status": "done",
+          "ms": 0,
+          "detail": "Standalone question"
+        },
+        {
+          "name": "Searching",
+          "status": "done",
+          "ms": 49
+        },
+        {
+          "name": "Ranking",
+          "status": "done",
+          "ms": 6,
+          "detail": "Vector + BM25 · Reciprocal Rank Fusion"
+        },
+        {
+          "name": "Generating",
+          "status": "done",
+          "ms": 16439
+        }
+      ]
+    },
+    {
+      "question": "What is the total beta budget?",
+      "text": "[1] The total beta budget is $48,000.",
+      "pass": true,
+      "firstTokenMs": 8659,
+      "ms": 11025,
+      "replacements": 0,
+      "steps": [
+        {
+          "name": "Rewriting query",
+          "status": "done",
+          "ms": 0,
+          "detail": "Standalone question"
+        },
+        {
+          "name": "Searching",
+          "status": "done",
+          "ms": 53
+        },
+        {
+          "name": "Ranking",
+          "status": "done",
+          "ms": 4,
+          "detail": "Vector + BM25 · Reciprocal Rank Fusion"
+        },
+        {
+          "name": "Generating",
+          "status": "done",
+          "ms": 10899
+        }
+      ]
+    },
+    {
+      "question": "How long are diagnostic logs retained?",
+      "text": "[1] The default retention period for diagnostic logs is 14 days.",
+      "pass": true,
+      "firstTokenMs": 9229,
+      "ms": 11435,
+      "replacements": 0,
+      "steps": [
+        {
+          "name": "Rewriting query",
+          "status": "done",
+          "ms": 0,
+          "detail": "Standalone question"
+        },
+        {
+          "name": "Searching",
+          "status": "done",
+          "ms": 56
+        },
+        {
+          "name": "Ranking",
+          "status": "done",
+          "ms": 4,
+          "detail": "Vector + BM25 · Reciprocal Rank Fusion"
+        },
+        {
+          "name": "Generating",
+          "status": "done",
+          "ms": 11321
+        }
+      ]
+    },
+    {
+      "question": "من المسؤولة عن إطلاق مشروع أطلس؟",
+      "text": "المسؤولة عن إطلاق مشروع أطلس هي مايا تشين [1].",
+      "pass": true,
+      "firstTokenMs": 26417,
+      "ms": 29417,
+      "replacements": 0,
+      "steps": [
+        {
+          "name": "Rewriting query",
+          "status": "done",
+          "ms": 0,
+          "detail": "Standalone question"
+        },
+        {
+          "name": "Searching",
+          "status": "done",
+          "ms": 72
+        },
+        {
+          "name": "Ranking",
+          "status": "done",
+          "ms": 4,
+          "detail": "Vector + BM25 · Reciprocal Rank Fusion"
+        },
+        {
+          "name": "Generating",
+          "status": "done",
+          "ms": 29279
+        }
+      ]
+    },
+    {
+      "question": "What was the Atlas revenue in 2023?",
+      "text": "I couldn't find this in the documents.",
+      "pass": true,
+      "firstTokenMs": 7252,
+      "ms": 8646,
+      "replacements": 0,
+      "steps": [
+        {
+          "name": "Rewriting query",
+          "status": "done",
+          "ms": 0,
+          "detail": "Standalone question"
+        },
+        {
+          "name": "Searching",
+          "status": "done",
+          "ms": 115
+        },
+        {
+          "name": "Ranking",
+          "status": "done",
+          "ms": 8,
+          "detail": "Vector + BM25 · Reciprocal Rank Fusion"
+        },
+        {
+          "name": "Generating",
+          "status": "done",
+          "ms": 8411
+        }
+      ]
+    }
+  ],
+  "replay": [
+    {
+      "question": "When does the Atlas public beta launch?",
+      "ms": 80,
+      "cached": true,
+      "identical": true
+    },
+    {
+      "question": "What is the total beta budget?",
+      "ms": 84,
+      "cached": true,
+      "identical": true
+    },
+    {
+      "question": "How long are diagnostic logs retained?",
+      "ms": 58,
+      "cached": true,
+      "identical": true
+    },
+    {
+      "question": "من المسؤولة عن إطلاق مشروع أطلس؟",
+      "ms": 72,
+      "cached": true,
+      "identical": true
+    }
+  ]
+}

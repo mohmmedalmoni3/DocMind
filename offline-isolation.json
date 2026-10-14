@@ -1,0 +1,50 @@
+﻿{
+    "at":  "2026-10-13T15:48:24.7477539Z",
+    "localApiReady":  true,
+    "externalRegistryBlocked":  true,
+    "externalRegistryError":  "{\"error\":\"pull model manifest: Get \\\"https://registry.ollama.ai/v2/library/qwen2.5/manifests/0.5b\\\": proxyconnect tcp: dial tcp 127.0.0.1:9: connectex: No connection could be made because the target machine actively refused it.\"}",
+    "downloadedModels":  [
+                             {
+                                 "name":  "qwen2.5:7b",
+                                 "parameters":  "7.6B",
+                                 "size":  4683087332
+                             },
+                             {
+                                 "name":  "bge-m3:latest",
+                                 "parameters":  "566.70M",
+                                 "size":  1157672605
+                             },
+                             {
+                                 "name":  "qwen2.5:3b",
+                                 "parameters":  "3.1B",
+                                 "size":  1929912432
+                             },
+                             {
+                                 "name":  "nomic-embed-text:latest",
+                                 "parameters":  "137M",
+                                 "size":  274302450
+                             },
+                             {
+                                 "name":  "embeddinggemma:latest",
+                                 "parameters":  "307.58M",
+                                 "size":  621875917
+                             },
+                             {
+                                 "name":  "embeddinggemma:latest",
+                                 "parameters":  "307.58M",
+                                 "size":  621875861
+                             },
+                             {
+                                 "name":  "llamacpp:82f094e4c0e19bc4208c692996d4f1ecf14e82a8dee579ee1d2ca1175260058e",
+                                 "parameters":  "307.58M",
+                                 "size":  621875861
+                             },
+                             {
+                                 "name":  "qwen2.5:1.5b",
+                                 "parameters":  "1.5B",
+                                 "size":  986061892
+                             }
+                         ],
+    "method":  "Dedicated Ollama process with HTTP/HTTPS proxy set to unreachable loopback port 9; cloud disabled. Local API bypasses proxy.",
+    "limits":  "Application-level network isolation; Wi-Fi and OS network adapters were not disconnected. This is not an OS firewall test."
+}

@@ -1,0 +1,109 @@
+{
+  "verifiedAt": "2026-10-10T21:59:40.358Z",
+  "generation": "qwen2.5:3b",
+  "embedding": "nomic-embed-text",
+  "documents": 4,
+  "chunks": 23,
+  "features": [
+    {
+      "name": "Compare: product brief",
+      "pass": true,
+      "text": "Maya Chen owns the product launch. [2]",
+      "ms": 2495,
+      "sourceFiles": [
+        "01-Project-Atlas.md"
+      ]
+    },
+    {
+      "name": "Compare: engineering handbook",
+      "pass": true,
+      "text": "Omar Haddad owns the release or launch. [1]",
+      "ms": 2815,
+      "sourceFiles": [
+        "02-Engineering-Handbook.md"
+      ]
+    },
+    {
+      "name": "Document summary",
+      "pass": true,
+      "text": "- Atlas is a private knowledge workspace for product teams, aiming to improve understanding through reliable answers for product managers, customer success, and engineers at 50-500 employees [2].\n- The Atlas public beta is scheduled to launch on November 18, 2026, with 150 invited teams, and general availability planned for February 2027 [3].\n- Success criteria for the beta include at least 70% of invited teams activating within the first week, median time to the first useful answer under 3 minutes, and a weekly active team retention rate exceeding 60% after four weeks [4].\n- The product scope for the beta includes document import, search, cited answers, and workspace-level access controls, with mobile apps, web crawling, and external CRM integrations out of scope [5].\n- Ownership and team structure are outlined, with Maya Chen owning the product launch, Omar Haddad leading engineering, Sofia Rivera owning design and user research, and Priya Shah leading customer success and the beta onboarding program [6].",
+      "ms": 90048,
+      "sourceFiles": [
+        "01-Project-Atlas.md"
+      ]
+    }
+  ],
+  "benchmark": [
+    {
+      "question": "When does the Atlas public beta launch?",
+      "expected": "November 18, 2026",
+      "terms": [
+        "november",
+        "18",
+        "2026"
+      ],
+      "file": "01-Project-Atlas.md",
+      "answer": "The Atlas public beta launches on November 18, 2026 [1].",
+      "pass": true,
+      "correct": true,
+      "citation": true,
+      "ms": 14689
+    },
+    {
+      "question": "What is the total beta budget?",
+      "expected": "$48,000",
+      "terms": [
+        "48,000"
+      ],
+      "file": "03-Beta-Playbook.md",
+      "answer": "The total beta budget is $48,000. [1]",
+      "pass": true,
+      "correct": true,
+      "citation": true,
+      "ms": 3153
+    },
+    {
+      "question": "How long are diagnostic logs retained?",
+      "expected": "14 days",
+      "terms": [
+        "14",
+        "days"
+      ],
+      "file": "02-Engineering-Handbook.md",
+      "answer": "The diagnostic logs are retained for 14 days [1].",
+      "pass": true,
+      "correct": true,
+      "citation": true,
+      "ms": 17149
+    },
+    {
+      "question": "من المسؤولة عن إطلاق مشروع أطلس؟",
+      "expected": "مايا تشين",
+      "terms": [
+        "مايا",
+        "تشين"
+      ],
+      "file": "04-دليل-المشروع.md",
+      "answer": "المسؤولة عن الإطلاق هي مايا تشين [1].",
+      "pass": true,
+      "correct": true,
+      "citation": true,
+      "ms": 3079
+    },
+    {
+      "question": "What was the Atlas revenue in 2023?",
+      "expected": "I couldn't find this in the documents",
+      "terms": [
+        "couldn't find"
+      ],
+      "file": null,
+      "answer": "I couldn't find this in the documents.",
+      "pass": true,
+      "correct": true,
+      "citation": true,
+      "ms": 1985
+    }
+  ],
+  "score": 100,
+  "summaryVerifiedAt": "2026-10-10T22:03:03.654Z"
+}

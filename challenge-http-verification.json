@@ -1,0 +1,273 @@
+{
+  "checks": [
+    {
+      "question": "كم الرسوم؟",
+      "status": 200,
+      "events": [
+        {
+          "type": "step",
+          "step": {
+            "name": "Rewriting query",
+            "status": "running",
+            "detail": "Standalone question · no extra model call"
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Rewriting query",
+            "status": "done",
+            "ms": 2,
+            "detail": "Standalone question · no extra model call"
+          }
+        },
+        {
+          "type": "sources",
+          "sources": [],
+          "confidence": "low",
+          "query": "كم الرسوم؟",
+          "model": "qwen2.5:7b",
+          "evidenceMs": 69
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Searching",
+            "status": "done",
+            "ms": 0,
+            "detail": "Ambiguous service · clarification required · no embedding or generation"
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Ranking",
+            "status": "done",
+            "ms": 0,
+            "detail": "Waiting for service selection"
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Generating",
+            "status": "done",
+            "ms": 0,
+            "detail": "Clarification, not a factual answer"
+          }
+        },
+        {
+          "type": "token",
+          "text": "أي خدمة تقصد؟ يرجى تحديد اسم الخدمة حتى لا أخلط شروطها أو رسومها:\n\n- إصدار تصريح السوق\n- تجديد تصريح السوق\n- إصدار بطاقة الحديقة\n- تجديد بطاقة الحديقة\n- حجز قاعة الحي\n- طلب حاوية إضافية\n- إصدار شهادة عنوان\n- تعديل شهادة عنوان\n- حجز ملعب الحي\n- إصدار بطاقة مركز القراءة"
+        },
+        {
+          "type": "done",
+          "ms": 69,
+          "grounded": false,
+          "cached": false
+        }
+      ]
+    },
+    {
+      "question": "كم رسم خدمة إصدار تصريح السوق؟",
+      "status": 200,
+      "events": [
+        {
+          "type": "step",
+          "step": {
+            "name": "Rewriting query",
+            "status": "running",
+            "detail": "Standalone question · no extra model call"
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Rewriting query",
+            "status": "done",
+            "ms": 0,
+            "detail": "Standalone question · no extra model call"
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Searching",
+            "status": "running"
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Searching",
+            "status": "done",
+            "ms": 93
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Ranking",
+            "status": "running",
+            "detail": "Matched service: إصدار تصريح السوق · vector + BM25 within service documents"
+          }
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Ranking",
+            "status": "done",
+            "ms": 3,
+            "detail": "Matched service: إصدار تصريح السوق · vector + BM25 within service documents"
+          }
+        },
+        {
+          "type": "sources",
+          "sources": [
+            {
+              "id": "08afdfb945e1a7c86f4b",
+              "file": "01-service.md",
+              "page": null,
+              "section": "الرسوم",
+              "text": "## الرسوم\n\nرسم خدمة إصدار تصريح السوق هو 19 دينارا للطلب العادي. تسدد الرسوم بعد مراجعة الوثائق عبر قناة الدفع المحلية المشار إليها في إشعار الطلب. هذه القيمة لا تشمل المخالفات أو الخدمات الأخرى. يجب حفظ إيصال الدفع لربطه بالطلب.",
+              "similarity": 0.7581786371909691,
+              "keyword": 1.4757934956901095,
+              "score": 0.03278688524590164,
+              "citation": 1
+            },
+            {
+              "id": "725d78c1830be61af71c",
+              "file": "01-service.md",
+              "page": null,
+              "section": "خدمة إصدار تصريح السوق",
+              "text": "# خدمة إصدار تصريح السوق\n\nوثيقة تجريبية خيالية لا تمثل تعليمات حكومية رسمية. رمز الخدمة ت 1. الجهة الافتراضية: مكتب خدمات حي النور. تختص هذه الصفحة بخدمة إصدار تصريح السوق فقط. لا يجوز نقل رسومها أو مواعيدها إلى خدمة أخرى تحمل اسما مشابها.",
+              "similarity": 0.612271100194891,
+              "keyword": 0.3513940118939993,
+              "score": 0.031746031746031744,
+              "citation": 2
+            },
+            {
+              "id": "14005ce0d0c062182e4a",
+              "file": "01-service.md",
+              "page": null,
+              "section": "الاستثناءات والإعفاء",
+              "text": "## الاستثناءات والإعفاء\n\nيعفى المستفيد المسجل في برنامج الدعم من رسم خدمة إصدار تصريح السوق بشرط إرفاق شهادة استحقاق سارية. لا يمنح الإعفاء بمجرد الطلب الشفهي ولا يشمل جميع المتقاعدين تلقائيا. لا تتضمن هذه الوثيقة مسارا مستعجلا أو رسوما له، ولا يصح اعتبار الرسم العادي رسما لمسار مستعجل.",
+              "similarity": 0.5688064826163509,
+              "keyword": 1.35908238289742,
+              "score": 0.0315136476426799,
+              "citation": 3
+            }
+          ],
+          "confidence": "high",
+          "query": "كم رسم خدمة إصدار تصريح السوق؟",
+          "model": "qwen2.5:7b",
+          "evidenceMs": 136
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Generating",
+            "status": "running"
+          }
+        },
+        {
+          "type": "token",
+          "text": "بحسب النص الوارد في المستند:\n\nرسم خدمة إصدار تصريح السوق هو 19 دينارا للطلب العادي. تسدد الرسوم بعد مراجعة الوثائق عبر قناة الدفع المحلية المشار إليها في إشعار الطلب. هذه القيمة لا تشمل المخالفات أو الخدمات الأخرى. يجب حفظ إيصال الدفع لربطه بالطلب. [1]"
+        },
+        {
+          "type": "step",
+          "step": {
+            "name": "Generating",
+            "status": "done",
+            "ms": 0,
+            "detail": "Direct document evidence · no generation model call"
+          }
+        },
+        {
+          "type": "done",
+          "ms": 139,
+          "grounded": true,
+          "cached": false,
+          "firstTokenMs": 139,
+          "method": "extractive"
+        }
+      ]
+    }
+  ],
+  "original": {
+    "ready": true,
+    "ollama": true,
+    "url": "http://127.0.0.1:11434",
+    "generation": "qwen2.5:3b",
+    "configured": "qwen2.5:3b",
+    "strictModel": false,
+    "serviceContext": "chunks",
+    "fallback": "llama3.2:3b",
+    "embedding": {
+      "name": "nomic-embed-text",
+      "ready": true
+    },
+    "index": {
+      "documents": 11,
+      "chunks": 103,
+      "compatible": true
+    },
+    "available": [
+      "qwen2.5:7b",
+      "bge-m3:latest",
+      "qwen2.5:3b",
+      "nomic-embed-text:latest",
+      "embeddinggemma:latest",
+      "embeddinggemma:latest",
+      "llamacpp:82f094e4c0e19bc4208c692996d4f1ecf14e82a8dee579ee1d2ca1175260058e",
+      "qwen2.5:1.5b"
+    ],
+    "voice": {
+      "ready": true,
+      "transcribe": true,
+      "voices": {
+        "ar": true,
+        "en": true
+      }
+    },
+    "error": ""
+  },
+  "health": {
+    "ready": true,
+    "ollama": true,
+    "url": "http://127.0.0.1:11434",
+    "generation": "qwen2.5:7b",
+    "configured": "qwen2.5:7b",
+    "strictModel": true,
+    "serviceContext": "chunks",
+    "fallback": "llama3.2:3b",
+    "embedding": {
+      "name": "bge-m3",
+      "ready": true
+    },
+    "index": {
+      "documents": 10,
+      "chunks": 70,
+      "compatible": true
+    },
+    "available": [
+      "qwen2.5:7b",
+      "bge-m3:latest",
+      "qwen2.5:3b",
+      "nomic-embed-text:latest",
+      "embeddinggemma:latest",
+      "embeddinggemma:latest",
+      "llamacpp:82f094e4c0e19bc4208c692996d4f1ecf14e82a8dee579ee1d2ca1175260058e",
+      "qwen2.5:1.5b"
+    ],
+    "voice": {
+      "ready": true,
+      "transcribe": true,
+      "voices": {
+        "ar": true,
+        "en": true
+      }
+    },
+    "error": ""
+  }
+}

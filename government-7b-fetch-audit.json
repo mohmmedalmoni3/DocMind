@@ -1,0 +1,9 @@
+{
+  "startedAt": "2026-10-13T15:51:07.748Z",
+  "allowed": {
+    "http://127.0.0.1:11435": 18
+  },
+  "blocked": [],
+  "mode": "loopback-fetch-only",
+  "osNetworkDisconnected": false
+}

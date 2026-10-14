@@ -1,0 +1,10 @@
+{
+  "model": "bge-m3",
+  "documents": 11,
+  "chunks": 103,
+  "largestEstimatedChunk": 499,
+  "actualModelTokensForThatChunk": 388,
+  "dimension": 1024,
+  "l2Norm": 1.0000001444882656,
+  "truncate": false
+}

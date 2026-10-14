@@ -1,0 +1,38 @@
+{
+  "ready": true,
+  "ollama": true,
+  "url": "http://127.0.0.1:11434",
+  "generation": "qwen2.5:7b",
+  "configured": "qwen2.5:7b",
+  "strictModel": true,
+  "serviceContext": "chunks",
+  "fallback": "llama3.2:3b",
+  "embedding": {
+    "name": "bge-m3",
+    "ready": true
+  },
+  "index": {
+    "documents": 10,
+    "chunks": 70,
+    "compatible": true
+  },
+  "available": [
+    "qwen2.5:7b",
+    "bge-m3:latest",
+    "qwen2.5:3b",
+    "nomic-embed-text:latest",
+    "embeddinggemma:latest",
+    "embeddinggemma:latest",
+    "llamacpp:82f094e4c0e19bc4208c692996d4f1ecf14e82a8dee579ee1d2ca1175260058e",
+    "qwen2.5:1.5b"
+  ],
+  "voice": {
+    "ready": true,
+    "transcribe": true,
+    "voices": {
+      "ar": true,
+      "en": true
+    }
+  },
+  "error": ""
+}

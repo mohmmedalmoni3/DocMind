@@ -1,0 +1,23 @@
+data: {"type":"step","step":{"name":"Rewriting query","status":"running","detail":"Standalone question · no extra model call"}}
+
+data: {"type":"step","step":{"name":"Rewriting query","status":"done","ms":1,"detail":"Standalone question · no extra model call"}}
+
+data: {"type":"step","step":{"name":"Searching","status":"running"}}
+
+data: {"type":"step","step":{"name":"Searching","status":"done","ms":131}}
+
+data: {"type":"step","step":{"name":"Ranking","status":"running","detail":"Vector + BM25 · prepared keyword index · duplicate passages removed"}}
+
+data: {"type":"step","step":{"name":"Ranking","status":"done","ms":3,"detail":"Vector + BM25 · prepared keyword index · duplicate passages removed"}}
+
+data: {"type":"sources","sources":[{"id":"b7c5e019b777f8154cf3","file":"01-تصريح-صيانة-منزلية.md","page":null,"section":"نطاق الخدمة وشروط الأهلية","text":"## نطاق الخدمة وشروط الأهلية\n\nتصريح الصيانة المنزلية البسيطة مخصص لأعمال الدهان وتبديل البلاط داخل المسكن القائم فقط. يشترط أن يكون عمر مقدم الطلب 18 سنة فأكثر، وأن تكون هويته سارية، وأن يكون مالك المسكن أو مستأجرا يحمل موافقة خطية من المالك.\n\nلا يشمل هذا التصريح هدم الجدران الحاملة أو إضافة طابق. الأعمال الإنشائية تحتاج خدمة أخرى، ولا يحدد هذا المستند شروطها أو رسومها.","similarity":0.6663996635675568,"keyword":4.256911984399482,"score":0.03278688524590164,"citation":1},{"id":"a676b9274073f0ebce2c","file":"01-تصريح-صيانة-منزلية.md","page":null,"section":"الرسوم والإعفاء","text":"## الرسوم والإعفاء\n\nرسم تصريح الصيانة المنزلية البسيطة هو 25 دينارا للطلب العادي، ولا تشمل هذه الرسوم أي غرامات أو خدمات أخرى.\n\nيعفى المستفيد المسجل في برنامج الدعم الاجتماعي من رسم تصريح الصيانة المنزلية البسيطة فقط، بشرط إرفاق شهادة استحقاق سارية عند تقديم الطلب. لا يكفي التصريح الشفهي للاستفادة من الإعفاء. لا ينص الدليل على إعفاء جميع المتقاعدين تلقائيا.","similarity":0.5571137802479466,"keyword":0.5909721388495468,"score":0.031754032258064516,"citation":2},{"id":"46df3f3dc4afa19735b5","file":"01-تصريح-صيانة-منزلية.md","page":null,"section":"الوثائق المطلوبة","text":"## الوثائق المطلوبة\n\nالوثائق المطلوبة لتصريح الصيانة المنزلية البسيطة هي: صورة الهوية السارية، وإثبات ملكية المسكن أو عقد الإيجار، وصورتان حديثتان لموقع العمل. يجب على المستأجر أن يرفق أيضا موافقة خطية من المالك. لا يطلب هذا الدليل شهادة عدم محكومية.","similarity":0.5741159990469216,"keyword":0.2357634894436066,"score":0.03128054740957967,"citation":3}],"confidence":"high","query":"هل يتيح تصريح الصيانة المنزلية البسيطة هدم الجدران الحاملة؟","model":"qwen2.5:7b","evidenceMs":206}
+
+data: {"type":"step","step":{"name":"Generating","status":"running"}}
+
+data: {"type":"token","text":"بحسب النص الوارد في المستند:\n\nتصريح الصيانة المنزلية البسيطة مخصص لأعمال الدهان وتبديل البلاط داخل المسكن القائم فقط. يشترط أن يكون عمر مقدم الطلب 18 سنة فأكثر، وأن تكون هويته سارية، وأن يكون مالك المسكن أو مستأجرا يحمل موافقة خطية من المالك.\n\nلا يشمل هذا التصريح هدم الجدران الحاملة أو إضافة طابق. الأعمال الإنشائية تحتاج خدمة أخرى، ولا يحدد هذا المستند شروطها أو رسومها. [1]"}
+
+data: {"type":"step","step":{"name":"Generating","status":"done","ms":0,"detail":"Direct document evidence · no generation model call"}}
+
+data: {"type":"done","ms":208,"grounded":true,"cached":false,"firstTokenMs":208,"method":"extractive"}
+
+

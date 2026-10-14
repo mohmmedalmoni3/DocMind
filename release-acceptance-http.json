@@ -1,0 +1,263 @@
+{
+  "at": "2026-10-14T12:18:46.431Z",
+  "base": "http://127.0.0.1:3003",
+  "syntheticDocuments": true,
+  "checks": [
+    {
+      "name": "Empty library",
+      "pass": true,
+      "ms": 190,
+      "detail": 0
+    },
+    {
+      "name": "Upload services 1–5",
+      "pass": true,
+      "ms": 14516,
+      "detail": {
+        "type": "complete",
+        "documents": 5,
+        "chunks": 35,
+        "cached": 0,
+        "warnings": [],
+        "uploadedFiles": [
+          "01-service.md",
+          "02-service.md",
+          "03-service.md",
+          "04-service.md",
+          "05-service.md"
+        ]
+      }
+    },
+    {
+      "name": "Upload services 6–10",
+      "pass": true,
+      "ms": 13115,
+      "detail": {
+        "type": "complete",
+        "documents": 10,
+        "chunks": 70,
+        "cached": 5,
+        "warnings": [],
+        "uploadedFiles": [
+          "06-service.md",
+          "07-service.md",
+          "08-service.md",
+          "09-service.md",
+          "10-service.md"
+        ]
+      }
+    },
+    {
+      "name": "Health and ten indexed documents",
+      "pass": true,
+      "ms": 97,
+      "detail": {
+        "ready": true,
+        "ollama": true,
+        "url": "http://127.0.0.1:11434",
+        "generation": "qwen2.5:7b",
+        "configured": "qwen2.5:7b",
+        "strictModel": true,
+        "serviceContext": "chunks",
+        "fallback": "llama3.2:3b",
+        "embedding": {
+          "name": "bge-m3",
+          "ready": true
+        },
+        "index": {
+          "documents": 10,
+          "chunks": 70,
+          "compatible": true
+        },
+        "available": [
+          "qwen2.5:7b",
+          "bge-m3:latest",
+          "qwen2.5:3b",
+          "nomic-embed-text:latest",
+          "embeddinggemma:latest",
+          "embeddinggemma:latest",
+          "llamacpp:82f094e4c0e19bc4208c692996d4f1ecf14e82a8dee579ee1d2ca1175260058e",
+          "qwen2.5:1.5b"
+        ],
+        "voice": {
+          "ready": true,
+          "transcribe": true,
+          "voices": {
+            "ar": true,
+            "en": true
+          }
+        },
+        "error": ""
+      }
+    },
+    {
+      "name": "Repeat ingestion uses cache",
+      "pass": true,
+      "ms": 41,
+      "detail": [
+        {
+          "type": "progress",
+          "file": "01-service.md",
+          "current": 1,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "02-service.md",
+          "current": 2,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "03-service.md",
+          "current": 3,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "04-service.md",
+          "current": 4,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "05-service.md",
+          "current": 5,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "06-service.md",
+          "current": 6,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "07-service.md",
+          "current": 7,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "08-service.md",
+          "current": 8,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "09-service.md",
+          "current": 9,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "10-service.md",
+          "current": 10,
+          "total": 10,
+          "message": "Already indexed · cache hit"
+        },
+        {
+          "type": "progress",
+          "file": "",
+          "current": 10,
+          "total": 10,
+          "message": "فحص الحقائق وحفظ أدلة اختلاف المستندات"
+        },
+        {
+          "type": "complete",
+          "documents": 10,
+          "chunks": 70,
+          "cached": 10,
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "name": "Attached files scope",
+      "pass": true,
+      "ms": 222,
+      "detail": {
+        "text": "بحسب النص الوارد في المستند:\n\nرسم خدمة إصدار تصريح السوق هو 19 دينارا للطلب العادي. تسدد الرسوم بعد مراجعة الوثائق عبر قناة الدفع المحلية المشار إليها في إشعار الطلب. هذه القيمة لا تشمل المخالفات أو الخدمات الأخرى. يجب حفظ إيصال الدفع لربطه بالطلب. [1]",
+        "done": {
+          "type": "done",
+          "ms": 183,
+          "grounded": true,
+          "cached": false,
+          "firstTokenMs": 182,
+          "method": "extractive"
+        },
+        "files": [
+          "01-service.md"
+        ]
+      }
+    },
+    {
+      "name": "Two attached services",
+      "pass": true,
+      "ms": 31161,
+      "detail": {
+        "text": "رسم خدمة إصدار تصريح السوق هو 19 دينارا [1]. رسم خدمة تجديد تصريح السوق هو 27 دينارا [3].",
+        "done": {
+          "type": "done",
+          "ms": 31145,
+          "grounded": true,
+          "cached": false,
+          "firstTokenMs": 19777,
+          "method": "generated"
+        },
+        "files": [
+          "01-service.md",
+          "02-service.md"
+        ]
+      }
+    },
+    {
+      "name": "Cached repeat",
+      "pass": true,
+      "ms": 95,
+      "detail": {
+        "text": "بحسب النص الوارد في المستند:\n\nرسم خدمة إصدار تصريح السوق هو 19 دينارا للطلب العادي. تسدد الرسوم بعد مراجعة الوثائق عبر قناة الدفع المحلية المشار إليها في إشعار الطلب. هذه القيمة لا تشمل المخالفات أو الخدمات الأخرى. يجب حفظ إيصال الدفع لربطه بالطلب. [1]",
+        "done": {
+          "type": "done",
+          "ms": 77,
+          "grounded": true,
+          "cached": true,
+          "method": "extractive",
+          "firstTokenMs": 77
+        },
+        "files": [
+          "01-service.md"
+        ]
+      }
+    },
+    {
+      "name": "Invalid file is rejected",
+      "pass": true,
+      "ms": 8,
+      "detail": 400
+    },
+    {
+      "name": "Arabic speech synthesis and transcription",
+      "pass": true,
+      "ms": 20513,
+      "detail": {
+        "bytes": 192044,
+        "transcript": "ما هي الوثائق المطلوبة للحصول على الخدمة؟",
+        "physicalMicrophoneTested": false
+      }
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "total": 10
+  }
+}
