@@ -3,6 +3,8 @@ import { readIndex } from "./index-store";
 import { complete, embed, generationModel, generate, rewrite } from "./ollama";
 import { cosine, rank, rankQueries } from "./retrieval";
 import { normalizeQuestion } from './query-normalization';
+import {arabiziView} from './query-views';
+import {rerankEvidence} from './reranker';
 import { sessionEvidence } from './session-evidence';
 import { questionParts } from './question-parts';
 import { scopedFieldEvidence } from './scoped-fields';
@@ -335,7 +337,8 @@ export async function answer(
   }
   const needsSubject=/(?:\bit\b|\bits\b|\bthem\b|ذلك|مدتها|رسومها|اهدافها|أهدافها|له|لها)(?:\s|[؟?]|$)/iu.test(query);
   const goalVariant=/[اأ]هداف/.test(query)?query.replace(/[اأ]هداف/g,'الهدف النهائي والمهارات المكتسبة'):undefined;
-  const searchQueries=[...new Set([query, ...(goalVariant?[goalVariant]:[]), ...(normalizedQuestion!==question && !resolveReferences && !resolvedServiceQuestion ? [question] : []), ...(options.questionContext && needsSubject ? [options.questionContext] : [])])];
+  const arabizi=arabiziView(question);
+  const searchQueries=[...new Set([query, ...(goalVariant?[goalVariant]:[]), ...(arabizi?[normalizeQuestion(arabizi)]:[]), ...(normalizedQuestion!==question && !resolveReferences && !resolvedServiceQuestion ? [question] : []), ...(options.questionContext && needsSubject ? [options.questionContext] : [])])];
   const vectors = await step(
     "Searching",
     async () => await embed(searchQueries, true, options.signal),
@@ -363,12 +366,14 @@ export async function answer(
           .flatMap((file) => retrieve(candidatesFor(index, file), 3))
           .map((s, i) => ({ ...s, citation: i + 1 }));
       if(serviceRoute.groups)return serviceRoute.groups.flatMap(files=>retrieve(candidates.filter(c=>files.includes(c.file)),Math.max(2,Math.floor(config.topK/serviceRoute.groups!.length)))).map((s,i)=>({...s,citation:i+1}));
-      return retrieve(
-        candidates,
-        style === "brief" && !(selectedFiles && selectedFiles.length > 1)
+      const finalK=style === "brief" && !(selectedFiles && selectedFiles.length > 1)
           ? Math.min(config.briefTopK, config.topK)
-          : config.topK,
-      );
+          : config.topK;
+      const initial=retrieve(candidates,config.rerank?Math.max(finalK,config.rerankCandidates):finalK);
+      if(!config.rerank)return initial;
+      const result=await rerankEvidence(question,initial,model,config.rerankTimeout,options.signal);
+      emit({type:'step',step:{name:'Ranking',status:'running',detail:result.status}});
+      return result.sources.slice(0,finalK);
     },
     options.summary
       ? "Representative passages across the document"

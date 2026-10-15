@@ -1,0 +1,5 @@
+[
+ {"id":"launch-jordan","dialect":"صياغة شامية تجريبية","query":"امتى رح يطلع أطلس ومين مسؤولة الإطلاق؟","files":["04-دليل-المشروع.md"],"relevantIds":["97de045c8ebd60289167"]},
+ {"id":"privacy-egypt","dialect":"صياغة مصرية تجريبية","query":"اللوجات بتفضل كام يوم وهل ينفع نحط فيها نص الملفات؟","files":["04-دليل-المشروع.md"],"relevantIds":["644379f4ff3d252177bb"]},
+ {"id":"budget-mixed","dialect":"عربية وإنجليزية","query":"كم الـ budget الكلي وأوقات support؟","files":["04-دليل-المشروع.md"],"relevantIds":["4a2847b082260339d353"]}
+]

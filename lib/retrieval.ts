@@ -65,10 +65,11 @@ export function rank(
   vector: number[],
   query: string,
   k = 5,
+  mode:'hybrid'|'dense'|'bm25'='hybrid',
 ): Source[] {
   if (!chunks.length) return [];
   const { frequencies, lengths, df: dfs, avg } = prepare(chunks);
-  const qt = [...new Set(lexicalTerms(query))];
+  const qt = mode==='dense'?[]:[...new Set(lexicalTerms(query))];
   const rows = chunks.map((c, i) => {
     let keyword = 0;
     for (const t of qt) {
@@ -78,12 +79,13 @@ export function rank(
       keyword +=
         (idf * (tf * 2.2)) / (tf + 1.2 * (0.25 + (0.75 * lengths[i]) / avg));
     }
-    return { ...c, similarity: cosine(vector, c.embedding), keyword, score: 0 };
+    return { ...c, similarity: mode==='bm25'?0:cosine(vector, c.embedding), keyword, score: 0 };
   });
   const semantic = [...rows].sort((a, b) => b.similarity - a.similarity);
   const lexical = [...rows]
     .filter((r) => r.keyword > 0)
     .sort((a, b) => b.keyword - a.keyword);
+  if(mode!=='hybrid')return (mode==='dense'?semantic:lexical).slice(0,k).map(({embedding,...r},i)=>({...r,citation:i+1}));
   semantic.forEach((r, i) => {
     r.score += 1 / (60 + i + 1);
   });

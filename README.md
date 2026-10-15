@@ -1,5 +1,9 @@
 # DocMind
 
+Official twelve-service submission and actual committee-model test results: [competition-entry/README-AR.md](competition-entry/README-AR.md), [RUN-RESULTS-AR.md](competition-entry/RUN-RESULTS-AR.md). Run-time generation uses `command-r7b-arabic:7b`; the UI's direct-answer shortcuts are not the official submission pipeline.
+
+Retrieval ablations, bounded Arabizi query views and optional local reranking: [RETRIEVAL-QUALITY.md](RETRIEVAL-QUALITY.md).
+
 Arabic multi-part questions, 22-country development matrix, quality gates, measured failures and UI audit: [ARABIC-QUALITY-AUDIT.md](ARABIC-QUALITY-AUDIT.md).
 
 Latest local latency improvements, measured results and safe fallback behavior: [SPEED.md](SPEED.md).
