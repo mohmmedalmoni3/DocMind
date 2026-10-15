@@ -5,3 +5,8 @@ run-report.json
 model-trace.jsonl
 baseline-*.json
 __pycache__/
+.env
+doctor-report.json
+handoff-*.json
+tests/.tmp/
+docs/handoff/source/

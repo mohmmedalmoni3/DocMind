@@ -25,6 +25,7 @@ class ContractTests(unittest.TestCase):
         submitted['chats'][0]['messages'][0].update(question='changed', contexts=['invented'])
         self.assertEqual(len(verify(original, submitted, {'actual source'})), 2)
 
+    @unittest.skipUnless((main.ROOT/'data'/'passport_renewal.txt').exists(),'official corpus required')
     def test_fields_and_unmodified_conditions(self):
         sections, services, _ = main.load_corpus(main.ROOT / 'data')
         self.assertEqual(len(services), 12)
@@ -59,6 +60,7 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(histories[3], [])
         self.assertEqual(len(timings), 4)
 
+    @unittest.skipUnless((main.ROOT/'data'/'passport_renewal.txt').exists(),'official corpus required')
     def test_answer_comes_from_model_and_context_is_exact_section(self):
         sections, services, _ = main.load_corpus(main.ROOT / 'data')
         class Fake:

@@ -1,0 +1,32 @@
+{
+  "chats": [
+    {
+      "chat_id": "synthetic-01",
+      "messages": [
+        {
+          "message_id": "synthetic-01-1",
+          "question": "شو الأوراق المطلوبة لتجديد دفتر العائلة؟",
+          "answer": "STRUCTURE EXAMPLE ONLY — NOT A MODEL ANSWER",
+          "contexts": []
+        },
+        {
+          "message_id": "synthetic-01-2",
+          "question": "وبقدر أقدم من السفارة؟",
+          "answer": "STRUCTURE EXAMPLE ONLY — NOT A MODEL ANSWER",
+          "contexts": []
+        }
+      ]
+    },
+    {
+      "chat_id": "synthetic-02",
+      "messages": [
+        {
+          "message_id": "synthetic-02-1",
+          "question": "بدي أجدد، شو المطلوب؟",
+          "answer": "STRUCTURE EXAMPLE ONLY — NOT A MODEL ANSWER",
+          "contexts": []
+        }
+      ]
+    }
+  ]
+}

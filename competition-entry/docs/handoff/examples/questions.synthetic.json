@@ -1,0 +1,26 @@
+{
+  "chats": [
+    {
+      "chat_id": "synthetic-01",
+      "messages": [
+        {
+          "message_id": "synthetic-01-1",
+          "question": "شو الأوراق المطلوبة لتجديد دفتر العائلة؟"
+        },
+        {
+          "message_id": "synthetic-01-2",
+          "question": "وبقدر أقدم من السفارة؟"
+        }
+      ]
+    },
+    {
+      "chat_id": "synthetic-02",
+      "messages": [
+        {
+          "message_id": "synthetic-02-1",
+          "question": "بدي أجدد، شو المطلوب؟"
+        }
+      ]
+    }
+  ]
+}

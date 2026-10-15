@@ -11,9 +11,14 @@ def normalize(text):
 
 def explicit_services(question):
     q = normalize(question)
+    if re.search(r'بنك|ائتمان|مصرف',q) and not re.search(r'ذكي[هة]|احوال|هوي[هة]',q):
+        return None
+    def word(pattern):
+        return re.search(r'(?<!\w)(?:و|ب|ل|لل)?(?:'+pattern+r')(?!\w)',q)
     families = [family for family, pattern in (
-        ('passport', r'جواز|باسبور'), ('family_book', r'دفتر\s*(?:العائل[هة]|عائل[هة])'),
-        ('id_card', r'البطاق[هة]|بطاق[هة]|الهوي[هة]|هوي[هة]')) if re.search(pattern, q)]
+        ('passport', r'(?:ال)?(?:جواز(?:\s+السفر)?|باسبور)(?:ي|ك|ه|ها)?'),
+        ('family_book', r'دفتر\s*(?:العائل[هة]|عائل[هة]|العيل[هة])'),
+        ('id_card', r'(?:ال)?(?:بطاق[هة]|هوي[هة])(?:ي|ك|ه|ها)?')) if word(pattern)]
     kinds = [kind for kind, pattern in (
         ('renewal', r'تجديد|اجدد|يجدد|نجدد'), ('first_issue', r'لاول\s*مر[هة]|اول\s*مر[هة]'),
         ('lost', r'فاقد|فقدت|ضايع|ضاع|ضاعت'), ('damaged', r'تالف|تلف|اهتر[اى]')) if re.search(pattern, q)]
@@ -30,7 +35,7 @@ def local_plan(question, history):
     if not re.search(r'جواز|باسبور|دفتر|بطاق|هوي', q) and re.search(r'طيران|تذاكر|تذكر[هة]|تصديق|جامع[هة]|رخص[هة]|سيار[هة]', q):
         return {'services': [], 'fields': []}
     # Negated service changes and comparisons need semantic interpretation.
-    if re.search(r'ليس|مش |مو |بدون |قارن|مقارن|ولا |اكثر|اغلى', q):
+    if re.search(r'(?<!\w)(?:ليس|مش|مو|بدون|لا|قصدي|اقصد|بل)(?!\w)|قارن|مقارن|ولا |اكثر|اغلى', q):
         return None
     parts = re.split(r'[,،]?\s+و(?=(?:قديش|كم|شو|ما|هل)\s)', q)
     part_services = [explicit_services(p) for p in parts]
@@ -43,6 +48,8 @@ def local_plan(question, history):
         if len(q) > 180 or not re.match(r'^(?:و|كم|شو|هل|قديش|وين|متى|كيف)', q):
             return None
         previous = next((m['content'] for m in reversed(history) if m['role'] == 'user'), '')
+        if re.search(r'(?<!\w)(?:ليس|مش|مو|لا|قصدي|اقصد|بل)(?!\w)',normalize(previous)):
+            return None
         services = explicit_services(previous)
         if not services:
             return None

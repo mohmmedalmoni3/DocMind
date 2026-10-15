@@ -1,5 +1,7 @@
 # DocMind
 
+Primary specification and current implementation: [SOURCE-OF-TRUTH.md](SOURCE-OF-TRUTH.md), [handoff runbook](competition-entry/README-HANDOFF-AR.md), [acceptance evidence](competition-entry/HANDOFF-ACCEPTANCE-AR.md).
+
 Official twelve-service submission and actual committee-model test results: [competition-entry/README-AR.md](competition-entry/README-AR.md), [RUN-RESULTS-AR.md](competition-entry/RUN-RESULTS-AR.md). Run-time generation uses `command-r7b-arabic:7b`; the UI's direct-answer shortcuts are not the official submission pipeline.
 
 Retrieval ablations, bounded Arabizi query views and optional local reranking: [RETRIEVAL-QUALITY.md](RETRIEVAL-QUALITY.md).
