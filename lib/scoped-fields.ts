@@ -9,8 +9,11 @@ export function scopedFieldEvidence(question:string,chunks:Chunk[]):{text:string
  const q=normalizedAnswer(question).replace(/[؟?!.]/g,'').trim();
  const hours=/^كم (?:عدد )?(?:الساعات|ساعات|ساعة)(?: (?:التدريب|الدورة|البرنامج|في الدورة|في البرنامج))?$/.test(q);
  const goals=/^(?:ما|اذكر) (?:هي )?(?:اهداف|الاهداف)(?: (?:الدورة|البرنامج|التدريب))?$/.test(q);
- const skills=/^ما (?:هي )?(?:المهارات|مهارات)(?: التي (?:يكتسبها|يتعلمها) المتدرب)?(?: (?:في |بنهاية )?(?:الدورة|البرنامج))?$/.test(q);
- if(!hours&&!goals&&!skills)return null;
+ const training=chunks.some(c=>/^دورة\s+/mu.test(c.text));
+ const outcomes=training&&/^ما الفوائد والنتائج الموثقة ل(?:لدورة|لبرنامج)$/.test(q);
+ const skills=outcomes||/^ما (?:هي )?(?:المهارات|مهارات)(?: التي (?:يكتسبها|يتعلمها) المتدرب)?(?: (?:في |بنهاية )?(?:الدورة|البرنامج))?$/.test(q);
+ const subject=/^ما (?:هو )?موضوع (?:الدورة|البرنامج)$/.test(q);
+ if(!hours&&!goals&&!skills&&!subject)return null;
  const matches:{chunk:Chunk;text:string}[]=[];
  for(const chunk of chunks){
   if(hours){
@@ -22,6 +25,13 @@ export function scopedFieldEvidence(question:string,chunks:Chunk[]):{text:string
     if(/ليس|ليست|باستثناء|الا |اقل|اكثر|سابق|تتغير|حد اقصى|حد ادنى|على حسب/.test(nearby))return null;
     matches.push({chunk,text:m[0]});
    }
+  }else if(subject){
+   // Topic means subject/description, not a claim to enumerate the whole curriculum.
+   const heading=chunk.text.match(/^(?:دورة|برنامج|كورس)\s+[^\n]{4,150}$/mu);
+   if(!heading || (chunk.page!==1&&chunk.page!==null))continue;
+   const block=chunk.text.slice(heading.index!).split(/\n\s*(?:[0-9٠-٩]+\s*$|#{1,6}\s)/mu)[0].trim();
+   if(block.length<25||block.length>700)continue;
+   matches.push({chunk,text:block});
   }else{
    // Full explicitly labeled section: retain conditions and every listed objective.
    const m=chunk.text.match(skills?/(?:^|\n)#{1,6}\s*(?:المهارات|مهارات)[^\n]*\n/:/(?:^|\n)#{1,6}\s*(?:أهداف|اهداف|الأهداف|الاهداف)[^\n]*\n/);

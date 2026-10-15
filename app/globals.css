@@ -1998,6 +1998,7 @@ button:hover:not(:disabled) {
   line-height: 1.6;
 }
 .markdown p {
+  white-space: pre-line;
   margin: 0 0 12px;
 }
 .markdown p:last-child {

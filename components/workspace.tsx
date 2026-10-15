@@ -95,8 +95,8 @@ const empty: Library = {
   stale: false,
   maxUpload: 20 * 1024 * 1024,
 };
-const pipeline = ["Rewriting query", "Searching", "Ranking", "Generating"];
-const iconFor = [Braces, Search, Layers3, Sparkles];
+const pipeline = ["Rewriting query", "Understanding request", "Searching", "Ranking", "Generating"];
+const iconFor = [Braces, Braces, Search, Layers3, Sparkles];
 export default function Workspace() {
   const [library, setLibrary] = useState<Library>(empty),
     [health, setHealth] = useState<Health | null>(null),
@@ -1624,6 +1624,7 @@ export default function Workspace() {
                                 {step?.detail ||
                                   [
                                     "Understanding your question",
+                                    "Identify every requested aspect",
                                     "Finding relevant passages",
                                     "Connecting the best evidence",
                                     "Turning context into clarity",
@@ -1661,9 +1662,9 @@ export default function Workspace() {
                             </div>
                             <p>{s.text.replace(/^#+ /, "").slice(0, 110)}…</p>
                             <div className="similarity-label">
-                              <span>Semantic similarity</span>
+                              <span>{s.similarity===0 && s.keyword===1 && s.score===0 ? 'نقل حرفي من المصدر' : 'Semantic similarity'}</span>
                               <strong>
-                                {Math.round(Math.max(0, s.similarity) * 100)}%
+                                {s.similarity===0 && s.keyword===1 && s.score===0 ? '—' : `${Math.round(Math.max(0, s.similarity) * 100)}%`}
                               </strong>
                             </div>
                             <div className="similarity-bar">

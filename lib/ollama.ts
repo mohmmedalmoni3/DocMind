@@ -95,7 +95,7 @@ export async function complete(
   model: string,
   messages: { role: "system" | "user" | "assistant"; content: string }[],
   signal?: AbortSignal,
-  json = false,
+  json: boolean | Record<string,unknown> = false,
   maxTokens = config.answerTokens,
 ): Promise<string> {
   const data = await (
@@ -106,7 +106,7 @@ export async function complete(
         messages,
         stream: false,
         keep_alive: config.keepAlive,
-        ...(json ? { format: "json" } : {}),
+        ...(json ? { format: json===true ? "json" : json } : {}),
         options: {
           temperature: 0,
           num_ctx: contextSize(

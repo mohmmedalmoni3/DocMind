@@ -6,7 +6,8 @@ import { normalizeQuestion } from './query-normalization';
 import { sessionEvidence } from './session-evidence';
 import { questionParts } from './question-parts';
 import { scopedFieldEvidence } from './scoped-fields';
-import {headingOnlyAnswer} from './answer-quality';
+import {headingOnlyAnswer,malformedAnswer} from './answer-quality';
+import {understandQuestion} from './question-understanding';
 import { alignNumericCitations, alignVerbatimCitations, numericCitationsSupported } from "./citations";
 import type {
   ChatTurn,
@@ -239,7 +240,7 @@ export async function answer(
       selectedFiles || index.documents.map((d) => d.name),
       selectedFiles?.length === 1,
     );
-  const query = await step(
+  let query = await step(
     "Rewriting query",
     () =>
       resolvedServiceQuestion ? Promise.resolve(resolvedServiceQuestion) : rewrite(
@@ -271,7 +272,16 @@ export async function answer(
     throw new Error(
       "This document is no longer indexed. Refresh your library.",
     );
-  const parts=!options.singlePart && !options.summary && !comparing ? questionParts(query) : [query];
+  const plan=!options.singlePart && !options.summary && !comparing
+    ? await step('Understanding request',()=>understandQuestion(query,model,options.signal),'Identify every requested aspect · preserve constraints')
+    : {parts:[query],mode:'rules' as const};
+  if(plan.mode==='clarify'){
+    const text=arabic(question)?'لم أتمكن من التحقق من فهم جميع أجزاء سؤالك. اذكر الأجزاء المطلوبة أو وضّح المقصود حتى لا أهمل أي معلومة.':'I could not verify all parts of your request. Please clarify the requested aspects so none are omitted.';
+    emit({type:'token',text});emit({type:'done',ms:Math.round(performance.now()-started),grounded:false,cached:false});
+    return {text,sources:[] as Source[],query,model,confidence:'low' as const};
+  }
+  const parts=plan.parts;
+  if(parts.length===1)query=parts[0];
   const fieldQuote=config.directFacts && style==='brief' && !options.summary && !comparing && parts.length===1 && (selectedFiles?.length===1 || !!options.file)
     ? scopedFieldEvidence(query,candidates) : null;
   if(fieldQuote){
@@ -290,11 +300,16 @@ export async function answer(
     for(let i=0;i<parts.length;i++){
       options.signal?.throwIfAborted();
       emit({type:'step',step:{name:'Searching',status:'running',detail:`Question part ${i+1}/${parts.length}: ${parts[i]}`}});
-      const child=await answer(parts[i],[],()=>{}, {
+      let child:AnswerResult;
+      try { child=await answer(parts[i],[],()=>{}, {
         ...options,singlePart:true,questionContext:query,
         // Carry only a uniquely identified service scope into short subquestions.
         files:serviceRoute.name?serviceRoute.files:selectedFiles,
-      });
+      }); } catch(error) {
+        options.signal?.throwIfAborted();
+        // A failed generation must not erase completed parts or suppress later ones.
+        child={text:arabic(question)?'تعذّر إكمال هذا الجزء بسبب خطأ أثناء معالجة الإجابة. أعد محاولة هذا الجزء منفردًا؛ لم يتم التحقق من جوابه.':'This part could not be completed due to a processing error. Retry this part separately; its answer was not verified.',sources:[],confidence:'low',query:parts[i],model};
+      }
       const numbering=new Map<number,number>();
       for(const source of child.sources){
         let shared=merged.find(s=>s.id===source.id);
@@ -476,7 +491,7 @@ export async function answer(
     if (
       text.trim() &&
       !text.includes(refusal(question)) &&
-      (!validCitations(text, sources) || !numericCitationsSupported(text,sources) || headingOnlyAnswer(text,sources))
+      (!validCitations(text, sources) || !numericCitationsSupported(text,sources) || headingOnlyAnswer(text,sources) || malformedAnswer(text,question,sources))
     ) {
       const repaired = await complete(
         model,
@@ -514,7 +529,7 @@ export async function answer(
       text = aligned;
       emit({ type: "replace", text });
     }
-    if(!numericCitationsSupported(text,sources)||headingOnlyAnswer(text,sources)){
+    if(!numericCitationsSupported(text,sources)||headingOnlyAnswer(text,sources)||malformedAnswer(text,question,sources)){
       text=refusal(question);emit({type:'replace',text});
     }
     if (

@@ -4,6 +4,8 @@ export function normalizeQuestion(question: string): string {
     شقد: 'كم', شكد: 'كم', قديش: 'كم', اديش: 'كم', أديش: 'كم',
     كام: 'كم', بكم: 'بكم', بكام: 'بكم', بقديش: 'بكم',
     شو: 'ما', شنو: 'ما', وش: 'ما', ايش: 'ما', إيش: 'ما',
+    إيه: 'ما', ايه: 'ما', إيشو: 'ما', قداش: 'كم', شحال: 'كم',
+    ويش: 'ما', شن: 'ما', شنوة: 'ما', شنهو: 'ما', آش: 'ما',
     شلون: 'كيف', ازاي: 'كيف', إزاي: 'كيف', وين: 'أين', فين: 'أين',
     امتى: 'متى', إمتى: 'متى', ايمتى: 'متى', ليش: 'لماذا', ليه: 'لماذا',
   };
@@ -12,6 +14,9 @@ export function normalizeQuestion(question: string): string {
     const bare=word.replace(/[\u064b-\u065f\u0670\u0640]/g,'');
     return replacements[bare] ?? (bare.startsWith('و') && replacements[bare.slice(1)] ? 'و'+replacements[bare.slice(1)] : word);
   });
+  // Context-bound: "واش" can mean yes/no, and "جم" can be a unit.
+  result=result.replace(/(^|\s)(و?)جم(?=\s+(?:ساعة|ساعات))/gu,'$1$2كم')
+    .replace(/(^|\s)(و?)واش(?=\s+(?:تهدر|نستفاد|نستفيد))/gu,'$1$2ما');
   result=result.replace(/(^|\s)(و?كم)\s+(الساعات|ساعات)(?=\s|[؟?!،,.]|$)/gu,'$1$2 عدد $3');
   return result.trim();
 }

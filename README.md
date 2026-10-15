@@ -1,5 +1,7 @@
 # DocMind
 
+Arabic multi-part questions, 22-country development matrix, quality gates, measured failures and UI audit: [ARABIC-QUALITY-AUDIT.md](ARABIC-QUALITY-AUDIT.md).
+
 Latest local latency improvements, measured results and safe fallback behavior: [SPEED.md](SPEED.md).
 
 Full Arabic documentation, architecture, workflow, interface guide and evaluation reports are in [documentation/](documentation/). Start with [the complete Arabic guide](documentation/DocMind-Documentation-AR.html) and [the release acceptance report](documentation/DocMind-Release-Acceptance-AR.html).

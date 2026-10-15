@@ -29,6 +29,7 @@ test('compound answers cover both parts, retain partial refusal, merge citations
   {id:'private',file:'other.md',page:1,section:'',text:'Secret unrelated material 90 hours.',embedding:[1,1]},
  ];await writeIndex(index);
  const prompts:string[]=[];
+ let failPhone=false;
  t.mock.method(globalThis,'fetch',async(url:string,init?:RequestInit)=>{
   if(url.endsWith('/api/tags'))return Response.json({models:[{name:config.model}]});
   const body=JSON.parse(String(init?.body));
@@ -36,6 +37,7 @@ test('compound answers cover both parts, retain partial refusal, merge citations
   const prompt=body.messages.at(-1).content;prompts.push(prompt);
   assert.ok(!prompt.includes('Secret unrelated'));
   const current=prompt.split('QUESTION: ').at(-1)||'';
+  if(failPhone&&current.includes('هاتف'))throw new Error('Simulated generation failure');
   const passage=prompt.match(/\[(\d+)\] FILE: course.md; PAGE: (?:1|2); SECTION: (?:الساعات|أهداف الدورة)/)?.[1]||'1';
   const citation=(section:string)=>prompt.match(new RegExp(`\\[(\\d+)\\] FILE: course.md; PAGE: \\d; SECTION: ${section}`))![1];
   const text=current.includes('هاتف')?'لم أجد هذه المعلومات في المستندات.':current.includes('اهداف')?`تشمل الأهداف بناء أوامر وتقييم النتائج [${citation('أهداف الدورة')}].`:`إجمالي الدورة 20 ساعة [${citation('الساعات')}].`;
@@ -48,4 +50,9 @@ test('compound answers cover both parts, retain partial refusal, merge citations
  const partial=await answer('شقد الساعات وهل يوجد رقم هاتف؟',[],()=>{},{files:['course.md'],bypassCache:true});
  assert.match(partial.text,/20 ساعة/);assert.match(partial.text,/### 2\./);assert.match(partial.text,/لم أجد/);
  assert.ok(new Set(partial.sources.map(s=>s.citation)).size===partial.sources.length);
+ failPhone=true;
+ const failedEvents:RagEvent[]=[];
+ const recovered=await answer('كم الساعات وهل يوجد رقم هاتف وما أهداف الدورة؟',[],e=>failedEvents.push(e),{files:['course.md'],bypassCache:true});
+ assert.match(recovered.text,/20 ساعة/);assert.match(recovered.text,/تعذّر إكمال/);assert.match(recovered.text,/### 3\./);assert.match(recovered.text,/بناء أوامر/);
+ assert.ok(failedEvents.some(e=>e.type==='done'&&!e.grounded));
 });
